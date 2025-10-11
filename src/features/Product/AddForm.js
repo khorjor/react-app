@@ -14,7 +14,7 @@ const AddForm = ({ addProduct }) => { // Accept an addProduct property, which is
     }
 
     return (
-        <div>
+        <>
             <h1>Add Product</h1>
             <form id="create-form" onSubmit={onSubmit}> 
                 <div className="input-group" >
@@ -52,7 +52,7 @@ const AddForm = ({ addProduct }) => { // Accept an addProduct property, which is
 
                 <button type="submit">Add product</button>
             </form>
-        </div>
+        </>
     )
 }
 
