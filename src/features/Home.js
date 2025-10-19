@@ -3,29 +3,31 @@ import Product from './Product';
 import { useState } from 'react';
 import AddForm from './Product/AddForm';
 import axios from 'axios';
+import styled from 'styled-components';
+import { useEffect } from 'react';
 
-let currentProductId = 9;
+// let currentProductId = 9;
 // Create a currentProductId variable outside of the functional component and set it to 9
 
-function Home() {
-    const [products, setProducts] = useState([]); // Create a new state called products and set the imported data as its initial value
-
-    async function getProducts() {
-        const products = await axios.get(
-            'https://68e9f957f1eeb3f856e5956b.mockapi.io/data/product/product'
-        );
-        setProducts(products.data);
-    }
-
-    getProducts();
-
-    function addProduct(product) {
-        const newProduct = { id: ++currentProductId, ...product };
-        setProducts([...products, newProduct]);
-    }
+function Home({ className, products }) {
+    return (
+        <div className={className}>
+            <h1>New Products</h1>
+            <ul className="Home__products">
+                {products.map((product) => (
+                    <Product key={product.id} item={product} />
+                ))}
+            </ul>
+        </div>
+    )
+    
+    // function addProduct(product) {
+    //     const newProduct = { id: ++currentProductId, ...product };
+    //     setProducts([...products, newProduct]);
+    // }
 
     return (
-        <>
+        <div className={className}>
             <h1>New Products</h1>
             {
                 products.length > 0 ? (
@@ -38,9 +40,18 @@ function Home() {
                     <div>Loading products....</div>
                 )
             }
-            <AddForm addProduct={addProduct} />
-        </>
+            {/* <AddForm addProduct={addProduct} /> */}
+        </div>
     );
 }
 
-export default Home;
+export default styled(Home)`
+  .Home__products {
+    display: flex;
+    flex-wrap: wrap;
+
+    list-style-type: none;
+    padding: 0;
+    margin: 0 -12px;
+  }
+`;
