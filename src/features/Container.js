@@ -10,3 +10,5 @@ export default styled(Container)`
   margin: 0 auto;
   padding: 4rem 0;
 `;
+
+// use with create product and update product pages to wrap the form content

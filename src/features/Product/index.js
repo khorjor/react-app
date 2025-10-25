@@ -1,15 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function Product({ item, className }) {
   const productImage = require(`../../assets/${item.imageURL}`);
   return (
     <li className={className}>
-      <a href={`/update-product/${item.id}`}>
+      <Link to={`/update-product/${item.id}`}>
         <img className="Products__image" src={productImage} alt={item.name} />
         <div className="Products__name">{item.name}</div>
         <small className="Products__type">{item.type}</small>
-      </a>
+      </Link>
     </li>
   );
 }

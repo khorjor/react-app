@@ -1,16 +1,23 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addProduct } from "./actions";
 
 // Create an AddForm component in the Product folder
-const AddForm = ({ addProduct }) => { // Accept an addProduct property, which is a function used to add a new product
+const AddForm = () => { // Accept an addProduct property, which is a function used to add a new product
     const [name, setName] = useState("");
-    const [type, setType] = useState("");
     const [imageURL, setImageURL] = useState(""); //their initial states should be set to empty string
-
+    const [type, setType] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const onSubmit = (event) => { 
         event.preventDefault();
-        addProduct({ name, type, imageURL }); // Bind an onSubmit event to the form element, it should call the addProduct function and pass a new product object
+        dispatch(addProduct({ name, imageURL, type })); 
+        //When the form is submitted, prevent the default behavior and call the addProduct function 
+        // with an object containing name, type, and imageURL
+        navigate('/');
     }
 
     return (
@@ -24,7 +31,8 @@ const AddForm = ({ addProduct }) => { // Accept an addProduct property, which is
                         type="text"
                         id="name"
                         value={name}
-                        onChange={(event) => setName(event.target.value)} //Each input field, set a value property and bind an onChange event
+                        onChange={(event) => setName(event.target.value)} 
+                        //Each input field, set a value property and bind an onChange event
                     />
                 </div>
 

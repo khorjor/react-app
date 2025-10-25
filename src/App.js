@@ -10,26 +10,28 @@ import AddForm from './features/Product/AddForm';
 import UpdateForm from './features/Product/UpdateForm';
 import { useEffect } from 'react';
 import { useState } from 'react';
-
-// let currentProductId = 9;
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchProducts } from './features/Product/actions';
 
 function App() {
-  const [products, setProducts] = useState([]); // Create a new state called products and set the imported data as its initial value
-
+  const products = useSelector((state) => state.products); 
+  // Create a new state called products and set the imported data as its initial value
+  const dispatch = useDispatch();
   useEffect(() => {
-         async function getProducts() {
-             const products = await axios.get(
-                 'https://68e9f957f1eeb3f856e5956b.mockapi.io/data/product/product'
-             );
-             setProducts(products.data);
-         }
-         getProducts();
-     }, []); // Put the empty array to make sure that the hook is executed only once
+    async function getProducts() {
+      const products = await axios.get(
+        // fetch data from outside api 
+        'https://68e9f957f1eeb3f856e5956b.mockapi.io/data/product/product'
+      );
+      dispatch(fetchProducts(products.data));
+    }
+    getProducts();
+  }, []); // Put the empty array to make sure that the hook is executed only once
 
-    // function addProduct(product) {
-    //     const newProduct = { id: ++currentProductId, ...product };
-    //     setProducts([...products, newProduct]);
-    // }
+  // function addProduct(product) {
+  //     const newProduct = { id: ++currentProductId, ...product };
+  //     setProducts([...products, newProduct]);
+  // }
 
 
   return (

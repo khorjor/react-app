@@ -63,3 +63,5 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default GlobalStyle;
+
+// apply this style to the entire app in src/app/App.js

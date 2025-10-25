@@ -1,4 +1,3 @@
-// import data from '../app/data.js'; // Import the data from the app/data.js
 import Product from './Product';
 import { useState } from 'react';
 import AddForm from './Product/AddForm';
@@ -25,24 +24,6 @@ function Home({ className, products }) {
     //     const newProduct = { id: ++currentProductId, ...product };
     //     setProducts([...products, newProduct]);
     // }
-
-    return (
-        <div className={className}>
-            <h1>New Products</h1>
-            {
-                products.length > 0 ? (
-                    <ul className="Home__products">
-                        {products.map((product) => (
-                            <Product key={product.id} item={product} />
-                        ))}
-                    </ul>
-                ) : (
-                    <div>Loading products....</div>
-                )
-            }
-            {/* <AddForm addProduct={addProduct} /> */}
-        </div>
-    );
 }
 
 export default styled(Home)`
